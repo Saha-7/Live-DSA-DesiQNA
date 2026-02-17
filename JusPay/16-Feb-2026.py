@@ -12,10 +12,10 @@ Arr2 = [[1,2],[2,3],[3,4],[4,5]]
 
 
 def safeViewPoints(N, M, k, Arr1, Arr2):
-    G = defaultdict(list)
+    graph = defaultdict(list)
     for u, v in Arr2:
-        G[u].append(v)
-        G[v].append(u)
+        graph[u].append(v)
+        graph[v].append(u)
 
     prefix = [0] * (N + 1)
     maxi = [0] * (N + 1)
@@ -28,7 +28,7 @@ def safeViewPoints(N, M, k, Arr1, Arr2):
     q = deque([1])
     while q:
         v = q.popleft()
-        for child in G[v]:
+        for child in graph[v]:
             if not used[child]:
                 used[child] = 1
                 q.append(child)
@@ -40,7 +40,7 @@ def safeViewPoints(N, M, k, Arr1, Arr2):
 
     count = 0
     for i in range(2, N + 1):
-        if len(G[i]) == 1 and maxi[i] <= M:
+        if len(graph[i]) == 1 and maxi[i] <= M:
             count += 1
     return count
 
