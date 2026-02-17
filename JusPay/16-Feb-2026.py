@@ -1,7 +1,15 @@
+from collections import deque
+from collections import defaultdict
 
 
+# Sample_Input
+N = 5
+M = 2
+k = 4
+Arr1 = [1, 1, 0, 1, 1]   
+Arr2 = [[1,2],[2,3],[3,4],[4,5]]
 
-from collections import deque, defaultdict
+
 
 def safeViewPoints(N, M, k, Arr1, Arr2):
     G = defaultdict(list)
@@ -27,8 +35,8 @@ def safeViewPoints(N, M, k, Arr1, Arr2):
                 if Arr1[child - 1] == 0:
                     prefix[child] = prefix[v] + 1
                 else:
-                    prefix[child] = 0          # safe → reset
-                maxi[child] = max(prefix[child], maxi[v])  # always update
+                    prefix[child] = 0          
+                maxi[child] = max(prefix[child], maxi[v])  
 
     count = 0
     for i in range(2, N + 1):
@@ -36,15 +44,6 @@ def safeViewPoints(N, M, k, Arr1, Arr2):
             count += 1
     return count
 
-def main():
-    # Sample 1 from image
-    N = 5
-    M = 2
-    k = 4
-    Arr1 = [1, 1, 0, 1, 1]   # nodes 1-7
-    Arr2 = [[1,2],[2,3],[3,4],[4,5]]
 
-    print(safeViewPoints(N, M, k, Arr1, Arr2))
 
-if __name__ == "__main__":
-    main()
+print(safeViewPoints(N, M, k, Arr1, Arr2))
